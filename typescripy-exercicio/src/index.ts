@@ -31,18 +31,24 @@ app.get("/ping", (req: express.Request, res:express.Response)=>{
 res.send("pong!")
 })
 
-app.get("/users", (req: express.Request, res:express.Response)=>{
-    const userALL = getAllUsers()
+app.get("/users", (req: express.Request, res:express.Response)=>{   //não precisa de validação, basta refatorar para o uso do try/catch
+    try{
+        const userALL = getAllUsers()
     
     res.status(200).send(userALL)
+    }
+    catch(error){}
 })
 
 
 
 app.get("/products",(req: express.Request, res: express.Response)=>{
-   const allProducts = getAllProducts()
+   try{
+    const allProducts = getAllProducts()
 
    res.status(200).send(allProducts)
+   }
+   catch(error){}
 })
 
 app.get("/product/search", (req: express.Request, res: express.Response)=>{
@@ -178,4 +184,7 @@ app.put("/products/:id", (req: express.Request, res: express.Response)=>{
 
     res.status(200).send("peoduto aleterado")
 })
+
+// faltou fazer o exercico fluxo de dados em backend
+
 
