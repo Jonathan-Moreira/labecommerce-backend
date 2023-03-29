@@ -20,7 +20,7 @@ VALUES
 -----------------------------------------------------
 
 
-CREATE TABLE products;(
+CREATE TABLE products(
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     name TEXT NOT NULL,
     price REAL NOT NULL,
@@ -32,9 +32,10 @@ SELECT *FROM products;
 
 INSERT INTO products (id, name, price, category)
 VALUES
-(00001, "Morgana Feiticeira", 100.00, "Boneca Colecionável"),
-(00002, "Lux Enpírica", 100.00, "Boneca Colecionável"),
-(00003, "Nami Embalos no Espaço", 100.00, "Boneca Colecionável"),
-(00004, "Dj Sona", 100.00, "Boneca Colecionável"),
-(00005, "Zyra Congregação das Bruxas", 100.00, "Boneca Colecionável");
+("00001", "Morgana Feiticeira", 100.00, "Boneca Colecionável"),
+("00002", "Lux Enpírica", 100.00, "Boneca Colecionável"),
+("00003", "Nami Embalos no Espaço", 100.00, "Boneca Colecionável"),
+("00004", "Dj Sona", 100.00, "Boneca Colecionável"),
+("00005", "Zyra Congregação das Bruxas", 100.00, "Boneca Colecionável");
 
+DROP TABLE products;
