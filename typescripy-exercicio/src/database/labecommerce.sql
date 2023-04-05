@@ -1,4 +1,4 @@
--- Active: 1680212964528@@127.0.0.1@3306
+-- Active: 1680644892653@@127.0.0.1@3306
 
 CREATE TABLE users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
@@ -18,7 +18,13 @@ VALUES
 ("0002", "aline.lima@gmail.com", "aline4477"),
 ("0003", "derick.jordan@gmail.com", "derick0099");
 
+UPDATE users
+SET id = "0001"
+WHERE password = 222324;
 
+UPDATE users
+SET id = "0002"
+WHERE password = "derick0099";
 
 -----------------------------------------------------
 CREATE TABLE products(
@@ -109,7 +115,7 @@ WHERE id = "1";
 --edição de produto por id
 UPDATE products
 SET price = 200.00
-WHERE id = "00001"
+WHERE id = "00001";
 
 --Exercício 3
 --Copie as queries do exercício 1 e refatore-as
@@ -132,3 +138,58 @@ WHERE id = "00001"
 --retorna os produtos com preços dentro do intervalo definido em ordem crescente
 
 -- feito na parte de cima com o SELECT %FROM PRODUCTS
+
+-------------------------------------------------------------------------------------------------------------
+
+--RELAÇOES SQL I
+--Exercício 1
+
+CREATE TABLE purchases (
+    id TEXT PRIMARY KEY NOT NULL UNIQUE,
+    total_price REAL NOT NULL,
+    paid INTEGER NOT NULL,
+    delivered_at TEXT,
+    buyer_id TEXT NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES users (id)
+);
+
+--Exercício 2
+
+SELECT 
+purchases.id,
+purchases.total_price,
+purchases.paid,
+purchases.delivered_at,
+purchases.buyer_id,
+users.id
+FROM purchases
+INNER JOIN users
+ON purchases.buyer_id = users.id;
+
+
+
+INSERT INTO purchases
+VALUES
+("u01",100,0,NULL,"0001"),
+("u02",90,1,NULL,"0002"),
+("u03",80,0,NULL,"0003"),
+("u04",20,1,NULL,"0004");
+
+UPDATE purchases
+SET delivered_at = "04/04/2023"
+WHERE id = "u04";
+
+UPDATE purchases
+SET delivered_at = "04/04/2023"
+WHERE id = "u01";
+
+UPDATE purchases
+SET delivered_at = "04/04/2023"
+WHERE id = "u02";
+
+--Exercício 3
+
+SELECT *FROM purchases
+INNER JOIN users
+ON purchases.buyer_id = users.id 
+WHERE users.id = "0001";
