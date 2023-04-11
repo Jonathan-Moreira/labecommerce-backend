@@ -65,7 +65,9 @@ DROP TABLE
 --Search Product by name
 --mocke um termo de busca, por exemplo "monitor"
 --retorna o resultado baseado no termo de busca
+
 SELECT *FROM products
+
 WHERE name LIKE "%Reinos Combatentes%";
 
 --Create User
@@ -193,3 +195,29 @@ SELECT *FROM purchases
 INNER JOIN users
 ON purchases.buyer_id = users.id 
 WHERE users.id = "0001";
+
+-- SELECT *FROM purchases
+
+CREATE TABLE purchases_products(
+purchase_id TEXT NOT NULL,
+product_id TEXT NOT NULL,
+quantity INTEGER NOT NULL,
+FOREIGN KEY (purchase_id) REFERENCES purchases(id),
+FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+
+INSERT INTO purchases_products
+VALUES
+("u01","00001",0),
+("u02","00002",1),
+("u04","00003",1);
+
+
+SELECT *FROM purchases_products;
+
+SELECT *FROM purchases_products
+INNER JOIN products ON purchases_products.product_id = products.id
+INNER JOIN purchases ON purchases_products.purchase_id = purchases.id
+INNER JOIN users ON purchases.buyer_id = users.id;
+
